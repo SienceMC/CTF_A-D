@@ -91,3 +91,11 @@ def menu():
         </html>
 
         """
+
+@app.route("/6C02828918114740F1A100B38EEB78B1396F80EEED6AA98EF2222D9BAD6BC158")
+def team1():
+    return "You are currently in Team 1"
+
+@app.route("/2C57B47A189B1BD3944A039FCD7EC6D872F2BFB3FEDA68A6BFE3DD326F650A64")
+def team2():
+    return "You are currently in Team 2"
