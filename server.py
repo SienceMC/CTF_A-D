@@ -24,6 +24,9 @@ def menu():
         background-color: #2980B9;
         }
 
+        .center{
+            text-align: center;
+        }
         .dropdown {
         position: relative;
         display: inline-block;
@@ -53,9 +56,9 @@ def menu():
         </head>
         <body>
 
-        <h2>Clickable Dropdown</h2>
-        <p>Click on the button to open the dropdown menu.</p>
-
+        <h2 class="center">Attack and Defense CTF</h2>
+        <p class="center">Please select your Team for submitting Flags.</p>
+        <center>
         <div class="dropdown">
         <button onclick="myFunction()" class="dropbtn">Dropdown</button>
         <div id="myDropdown" class="dropdown-content">
@@ -64,7 +67,7 @@ def menu():
             <a href="https://heeeeeeeey.com/">Admin</a>
         </div>
         </div>
-
+        </center>
         <script>
         /* When the user clicks on the button, 
         toggle between hiding and showing the dropdown content */
