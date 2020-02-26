@@ -1,6 +1,15 @@
 import flask
+from flask_sqlalchemy import SQLAlchemy
 
 app = flask.Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ctf.db'
+
+class Flags(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(200))
+
+    # https://youtu.be/Z1RJmh_OqeA?t=1115
+
 
 @app.route("/")
 def menu():
