@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+    
+  <head>
+  <style>
+    .center{
+        text-align: center
+    }
+
+  </style>
+    <title>Admin</title>
+  </head>
+      
+  <body>
+    <div class="center">
+        <table>
+            {% if teams|length < 1 %}
+            <p>THERE ARE NO TEAMS!</p>
+            {% else %}
+            <tr>
+                <th>Team</th>
+                <th>Points</th>
+                <th>Action</th>
+            </tr>
+            {% for team in teams %}
+            <tr>
+                <td>
+                {{ team.name }}
+                </td>
+                <td>
+                {{ team.points }}
+                </td>
+                <td>
+
+                    <a href="/deleteteam/{{team.id}}">Delete</a>
+                <!-- <form action="#" method="POST">
+                    <input type="hidden" value="teamdelete" name="request">
+                    <input type="hidden" value="{{ team.id }}" name="team">
+                    <input type="submit" value="Delete">
+                </form> -->
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </table>
+    </div>
+    <div class="center">
+        <form action="#" method="POST">
+            <input type="hidden" value="teamadd" name="request">
+            <input type="submit" value="Add Team">
+        </form>
+    </div>
+    <div class="center">
+        <table>
+            {% if flags|length < 1 %}
+            <p>THERE ARE NO FLAGS!</p>
+            {% else %}
+            <tr>
+                <th>Flag</th>
+                <th>Points</th>
+                <th>Team1</th>
+                <th>Team2</th>
+            </tr>
+            {% for flag in flags %}
+            <tr>
+                <td>
+                {{ flag.flag }}
+                </td>
+                <td>
+                {{ flag.points }}
+                </td>
+                <td>
+                {{ flag.team1 }}
+                </td>
+                <td>
+                {{ flag.team2 }}
+                </td>
+                <td>
+
+                    <a href="/deleteflag/{{flag.id}}">Delete</a>
+                <!-- <form action="#" method="POST">
+                    <input type="hidden" value="flagdelete" name="request">
+                    <input type="hidden" value="{{ flag.id }}" name="flag">
+                    <input type="submit" value="Delete">
+                </form> -->
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </table>
+    </div>
+    <div class="center">
+        <form action="#" method="POST">
+            <input type="hidden" value="flagadd" name="request">
+            Flag: <input type="text" value="FLAG{...}" name="flag">
+            Points: <input type="text" value="0" name="points">
+            <input type="submit" value="Add Flag">
+        </form>
+    </div>
+  </body>

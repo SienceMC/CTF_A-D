@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+    
+  <head>
+  <style>
+    .center{
+        text-align: center
+    }
+
+  </style>
+    <title>{{team.name}}</title>
+  </head>
+      
+  <body> 
+      <h1 class="center">{{team}}</h1>
+      <h4 class="center">Please Enter the Flag to gain Points</h4>
+      <form class="center" action="/capture" method="POST">
+        Flag: <input type="text" value="FLAG{...}" name="Flag">
+        <input type="hidden" name="Team" value="{{team}}">
+        <input type="submit" value="GIMME!!!!">
+      </form>
+  </body>
