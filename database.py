@@ -6,16 +6,17 @@ cur = conn.cursor()
 
 
 # Create Database flags
-# cur.execute("""CREATE TABLE flags (
-#      flag BLOB,
-#      points INTEGER
-#      )""")
+cur.execute("""CREATE TABLE flags (
+     flag BLOB,
+     points INTEGER
+     )""")
 
 # Create Database teams
-# cur.execute("""CREATE TABLE teams (
-#     name TEXT,
-#     points INTEGER
-#     )""")
+cur.execute("""CREATE TABLE teams (
+    name TEXT,
+    points INTEGER,
+    flags BLOB
+    )""")
 
 
 
