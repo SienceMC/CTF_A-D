@@ -18,6 +18,14 @@ class Database:
     def execute(self, what):
         self.cursor.execute(what)
 
+# Not Working for some Reason:
+
+# Database.execute("""CREATE TABLE flags (
+#     flag text,
+#     points integer
+#     )""")
+
+
 # Database.create("flags", ("id INTEGER NOT NULL PRIMARY KEY", ))
 
 
