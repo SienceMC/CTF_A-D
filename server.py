@@ -51,22 +51,27 @@ def menu():
 def submit():
     flag = flask.request.form.get("Flag")
     team = flask.request.form.get("Team")
-    flaged = Flags.query.filter_by(flag = flag).all()
-    if not team.name in flaged.teams:
-        try:
-            db.session.delete(flaged)
-            flaged.teams += team.name
-            db.session.remove(team)
-            team.points += flaged.points
-            db.session.add(team)
-            db.session.add(flaged)
-            db.session.commit()
-        except:
-            return "<h1>OH CRAP!</h1><h2>There was an error occured!</h2>"
-        finally:
-            return f"<h1>SUBMITTED!</h1><h2>YOUR TEAMS' SCORE's now: {team.points}</h2>"
-    elif flaged.team1:
-        return "<h1>YOU LITTLE...</h1>"
+    team = Teams.query.filter_by(name = team).first()
+    flaged = Flags.query.filter_by(flag = flag).first()
+    try:
+        if team.name not in flaged.teams:
+            try:
+                db.session.delete(team)
+                db.session.delete(flaged)
+                flaged.teams += team.name
+                team.points += flaged.points
+                db.session.add(team)
+                db.session.add(flaged)
+                db.session.commit()
+            except:
+                return "<h1>OH CRAP!</h1><h2>There was an error occured!</h2>"
+            finally:
+                return f"<h1>SUBMITTED!</h1><h2>YOUR TEAMS' SCORE's now: {team.points}</h2>"
+        elif team.name in flaged.teams:
+            print(f"INFO: Detected multiple submission from team { team.id }")
+            return "<h1>YOU LITTLE...</h1><h2>You really tried to enter a flag two times?</h2>"
+    except:
+        return render_template('false_flag.html')
     # flaggedflags = flagthatshit("team1")
         
         # flaggedflags = flagthatshit("team2")
@@ -127,4 +132,4 @@ def delete_(id):
 
 
 if __name__ == "__main__":
-    app.run(port=80, debug=True)
+    app.run(host="0.0.0.0" ,port=80, debug=True)
