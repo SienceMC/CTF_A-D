@@ -59,7 +59,7 @@
         <h2 class="center">Attack and Defense CTF</h2>
         <p class="center">Please select your Team for submitting Flags.</p>
         <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+        <button onclick="dropdown()" class="dropbtn">Select Team</button>
         <div id="myDropdown" class="dropdown-content">
             {% if teams|length > 0 %}
             {% for team in teams  %}
@@ -72,7 +72,7 @@
         <script>
         /* When the user clicks on the button, 
         toggle between hiding and showing the dropdown content */
-        function myFunction() {
+        function dropdown() {
         document.getElementById("myDropdown").classList.toggle("show");
         }
 

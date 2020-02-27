@@ -64,13 +64,15 @@ def submit():
                 db.session.add(flaged)
                 db.session.commit()
             except:
-                return "<h1>OH CRAP!</h1><h2>There was an error occured!</h2>"
+                return "<h1>OH CRAP!</h1><h2>An error occured!</h2>"
             finally:
+                print(f"INFO: Flagsubmitt recived from Team {team.id}")
                 return f"<h1>SUBMITTED!</h1><h2>YOUR TEAMS' SCORE's now: {team.points}</h2>"
         elif team.name in flaged.teams:
             print(f"INFO: Detected multiple submission from team { team.id }")
             return "<h1>YOU LITTLE...</h1><h2>You really tried to enter a flag two times?</h2>"
     except:
+        print(f"INFO: False Flagsubmitt recived from Team {team.id}")
         return render_template('false_flag.html')
     # flaggedflags = flagthatshit("team1")
         
@@ -90,8 +92,9 @@ def admin():
             newteam = Teams(name=f"team{len(Teams.query.all())+1}")
             db.session.add(newteam)
             db.session.commit()
+            print("INFO: Teamadd recived")
         elif flask.request.form.get("request") == "flagadd":
-            print("Flagadd recived")
+            print("INFO: Flagadd recived")
             newflag = Flags(flag=flask.request.form.get("flag"))
             newflag.points = flask.request.form.get("points")
             db.session.add(newflag)
@@ -105,6 +108,7 @@ def admin():
             flag = Flags.query.filter_by(id = flask.request.form.get("flag")).all()
             db.session.remove(flag)
             db.session.commit()
+            print("INFO: Flagdelete recived")
     return render_template('admin.html', teams=Teams.query.all(), flags=Flags.query.all())
 
 @app.route('/deleteteam/<int:id>')
