@@ -1,9 +1,7 @@
 import flask
 from flask import render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
-# import sqlite3
 from datetime import datetime
-# import os
 app = flask.Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ctf.db'
 db = SQLAlchemy(app)

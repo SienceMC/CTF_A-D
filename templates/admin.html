@@ -5,7 +5,16 @@
     .center{
         text-align: center
     }
-
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 10px;
+        
+    }
   </style>
     <title>Admin</title>
   </head>
@@ -24,7 +33,7 @@
             {% for team in teams %}
             <tr>
                 <td>
-                {{ team.name }}
+                Team {{ team.id }}
                 </td>
                 <td>
                 {{ team.points }}
@@ -56,10 +65,10 @@
             {% else %}
             <tr>
                 <th>Flag</th>
-                <th>Points</th
-                {% if teams|length > 0 %}
+                <th>Points</th>
+                {% if flags|length > 0 %}
                 {% for team in teams %}
-                <th>{{team.name}}</th>
+                <th>Team {{team.id}}</th>
                 {% endfor %}
                 {% endif %}
             </tr>
@@ -71,12 +80,21 @@
                 <td>
                 {{ flag.points }}
                 </td>
-                <td>
-                {{ flag.team1 }}
+                {% if flags|length > 0 %}
+                {% for team in teams %}
+                
+                {% if team.name in flag.teams %}
+                <td style="background-color: green;">
+                <p>&#10003</p>
                 </td>
-                <td>
-                {{ flag.team2 }}
+                {% else %}
+                <td style="background-color: red;">
+                <p>&#10005</p>
                 </td>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                
                 <td>
 
                     <a href="/deleteflag/{{flag.id}}">Delete</a>
