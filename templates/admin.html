@@ -56,9 +56,12 @@
             {% else %}
             <tr>
                 <th>Flag</th>
-                <th>Points</th>
-                <th>Team1</th>
-                <th>Team2</th>
+                <th>Points</th
+                {% if teams|length > 0 %}
+                {% for team in teams %}
+                <th>{{team.name}}</th>
+                {% endfor %}
+                {% endif %}
             </tr>
             {% for flag in flags %}
             <tr>
