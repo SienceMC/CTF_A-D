@@ -3,7 +3,12 @@
         <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
-
+        body{
+            background-image: url("../static/images/frog.gif");
+            background-repeat: repeat;
+            background-size: contain;
+            background-position: center;
+        }
         @import url('https://fonts.googleapis.com/css?family=Oxanium&display=swap');
         .dropbtn {
         background-color: #3498DB;
@@ -14,17 +19,31 @@
         cursor: pointer;
         }
 
+
         .dropbtn:hover, .dropbtn:focus {
         background-color: #2980B9;
         }
 
         .center{
             text-align: center;
-            font-family: 'Oxanium', ;
+            font-family: 'Oxanium';
+            font-size: 50px;
             margin: auto;
             /* position: center; */
             padding: 10px;
+            color: white;
         }
+
+        .droptext{
+            text-align: center;
+            font-family: 'Oxanium';
+            font-size: 10px;
+            margin: auto;
+            /* position: center; */
+            padding: 10px;
+            color: white;
+        }
+
 
         .dropdown {
         position: center;
@@ -34,8 +53,10 @@
 
         .dropdown-content {
         display: none;
-        position: absolute;
-        background-color: #f1f1f1;
+        font-family: 'Oxanium';
+        font-size: 50px;
+        position: absolutergba(255, 255, 255, 0.75);
+        background-color: white;
         min-width: 160px;
         overflow: auto;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -69,6 +90,9 @@
             <a href="https://heeeeeeeey.com/">Admin</a>
         </div>
         </div>
+        <!-- <img src="../static/images/frog.gif" width="200" height="198" style="margin: 10px;"> -->
+
+
         <script>
         /* When the user clicks on the button, 
         toggle between hiding and showing the dropdown content */
