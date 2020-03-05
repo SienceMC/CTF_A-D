@@ -31,13 +31,13 @@ class Flags(db.Model):
     def __repr__(self):
         return '<Flag %r>' % self.id
 
-class Teams(db.Model):
+class Persons(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(5))
+    name = db.Column(db.String(50))
     points = db.Column(db.Integer, default=0)
 
     def __repr__(self):
-        return '<Team %r>' % self.id
+        return '<Person %r>' % self.id
 
 # db.create_all()
 
