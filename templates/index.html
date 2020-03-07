@@ -2,6 +2,7 @@
         <html>
         <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="refresh" content="10">
         <style>
         body{
             background-image: url("../static/images/frog.gif");
@@ -10,19 +11,6 @@
             background-position: center;
         }
         @import url('https://fonts.googleapis.com/css?family=Oxanium&display=swap');
-        .dropbtn {
-        background-color: #3498DB;
-        color: white;
-        padding: 16px;
-        font-size: 16px;
-        border: none;
-        cursor: pointer;
-        }
-
-
-        .dropbtn:hover, .dropbtn:focus {
-        background-color: #2980B9;
-        }
 
         .center{
             text-align: center;
@@ -33,87 +21,42 @@
             padding: 10px;
             color: white;
         }
-
-        .droptext{
-            text-align: center;
-            font-family: 'Oxanium';
-            font-size: 10px;
-            margin: auto;
-            /* position: center; */
-            padding: 10px;
-            color: white;
-        }
-
-
-        .dropdown {
-        position: center;
-        margin: auto;
-        display: inline-block;
-        }
-
-        .dropdown-content {
-        display: none;
-        font-family: 'Oxanium';
-        font-size:15px;
-        position: absolutergba(255, 255, 255, 0.75);
-        background-color: white;
-        min-width: 160px;
-        overflow: auto;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-        }
-
-        .dropdown-content a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-        }
-
-        .dropdown a:hover {background-color: #ddd;}
-
         .show {display: block;}
         </style>
         </head>
         <body class="center">
         <img src="../static/images/logo.png" width="320" height="200">
         <h2 class="center">CTF</h2>
-        <p class="center">Please select your Team for submitting Flags.</p>
-        <div class="dropdown">
-        <button onclick="dropdown()" class="dropbtn">Select Team</button>
-        <div id="myDropdown" class="dropdown-content">
-            {% if teams|length > 0 %}
-            {% for team in teams  %}
-            <a href="/team/{{team.id}}">Team {{team.id}}</a>
-            {% endfor%}
-            {% endif%}
-            <a href="https://heeeeeeeey.com/">Admin</a>
-        </div>
-        </div>
+        <p class="center">Please insert your name to get started.</p>
+        <form class="center" action="/person" method="POST">
+            Name: <input type="text" value="" name="name">
+        </form>
+        <br>
+        <table class="center">
+            {% if ranks|length < 1 %}
+            <p>THERE ARE NO PERSONS!</p>
+            {% else %}
+            <tr>
+                <th>Rank</th>
+                <th>Person</th>
+                <th>Points</th>
+            </tr>
+            {% for person in ranks %}
+            <tr>
+                <td>
+                {{ person[0] }}
+                </td>
+                <td>
+                {{ person[1] }}
+                </td>
+                <td>
+                {{ person[2] }}
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </table>
         <!-- <img src="../static/images/frog.gif" width="200" height="198" style="margin: 10px;"> -->
-
-
-        <script>
-        /* When the user clicks on the button, 
-        toggle between hiding and showing the dropdown content */
-        function dropdown() {
-        document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-        if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-            }
-        }
-        }
-        </script>
 
         </body>
         </html>

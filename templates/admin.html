@@ -1,6 +1,7 @@
 <!DOCTYPE html>
     
   <head>
+    <meta http-equiv="refresh" content="10">
   <style>
     .center{
         text-align: center
@@ -22,28 +23,28 @@
   <body>
     <div class="center">
         <table>
-            {% if teams|length < 1 %}
-            <p>THERE ARE NO TEAMS!</p>
+            {% if persons|length < 1 %}
+            <p>THERE ARE NO PERSONS!</p>
             {% else %}
             <tr>
-                <th>Team</th>
+                <th>Person</th>
                 <th>Points</th>
                 <th>Action</th>
             </tr>
-            {% for team in teams %}
+            {% for person in persons %}
             <tr>
                 <td>
-                Team {{ team.id }}
+                {{ person.name }}
                 </td>
                 <td>
-                {{ team.points }}
+                {{ person.points }}
                 </td>
                 <td>
 
-                    <a href="/deleteteam/{{team.id}}">Delete</a>
+                    <a href="/deleteperson/{{person.name}}">Delete</a>
                 <!-- <form action="#" method="POST">
-                    <input type="hidden" value="teamdelete" name="request">
-                    <input type="hidden" value="{{ team.id }}" name="team">
+                    <input type="hidden" value="persondelete" name="request">
+                    <input type="hidden" value="{{ person.id }}" name="person">
                     <input type="submit" value="Delete">
                 </form> -->
                 </td>
@@ -51,12 +52,6 @@
             {% endfor %}
             {% endif %}
         </table>
-    </div>
-    <div class="center">
-        <form action="" method="POST">
-            <input type="hidden" value="teamadd" name="request">
-            <input type="submit" value="Add Team">
-        </form>
     </div>
     <div class="center">
         <table>
@@ -67,8 +62,8 @@
                 <th>Flag</th>
                 <th>Points</th>
                 {% if flags|length > 0 %}
-                {% for team in teams %}
-                <th>Team {{team.id}}</th>
+                {% for person in persons %}
+                <th>Person {{person.id}}</th>
                 {% endfor %}
                 {% endif %}
             </tr>
@@ -81,9 +76,9 @@
                 {{ flag.points }}
                 </td>
                 {% if flags|length > 0 %}
-                {% for team in teams %}
+                {% for person in persons %}
                 
-                {% if team.name in flag.teams %}
+                {% if person.name in flag.persons %}
                 <td style="background-color: green;">
                 <p>&#10003</p>
                 </td>
