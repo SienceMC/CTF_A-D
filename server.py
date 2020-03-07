@@ -70,25 +70,25 @@ def submit():
                 db.session.add(flaged)
                 db.session.commit()
             except:
-                return "<h1>OH CRAP!</h1><h2>An error occured!</h2>"
+                return f'<meta http-equiv="refresh" content="2; url=/person?name={person.name}"><h1>OH CRAP!</h1><h2>An error occured!</h2>'
             finally:
                 print(f"INFO: Flagsubmit recived from {person.name}")
-                return f"<h1>SUBMITTED!</h1><h2>YOUR SCORE's now: {person.points}</h2>"
+                return f'<meta http-equiv="refresh" content="2; url=/person?name={person.name}"><h1>SUBMITTED!</h1><h2>YOUR SCORE\'s now: {person.points}</h2>'
         elif person.name in flaged.persons:
             print(f"INFO: Detected multiple submission from { person.name }")
-            return "<h1>YOU LITTLE...</h1><h2>You really tried to enter a flag two times?</h2>"
+            return f'<meta http-equiv="refresh" content="2; url=/person?name={person.name}"><h1>YOU LITTLE...</h1><h2>You really tried to enter a flag two times?</h2>'
     except:
         print(f"INFO: False Flagsubmit recived from {person.name}")
-        return render_template('false_flag.html')
+        return render_template('false_flag.html', person=person)
     # flaggedflags = flagthatshit("person1")
         
         # flaggedflags = flagthatshit("person2")
     return str(flaged)
 
 
-@app.route("/person", methods=['POST'])
+@app.route("/person", methods=['GET'])
 def person():
-    name = flask.request.form.get("name")
+    name = flask.request.args.get('name')
     print(name)
     print(Persons.query.filter_by(name=name).first())
     if Persons.query.filter_by(name=name).first() == None:
