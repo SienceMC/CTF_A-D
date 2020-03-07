@@ -60,23 +60,23 @@ def submit():
     person = Persons.query.filter_by(name = person).first()
     flaged = Flags.query.filter_by(flag = flag).first()
     try:
-        if person.name not in flaged.persons:
-            try:
-                db.session.delete(person)
-                db.session.delete(flaged)
-                flaged.persons += person.name
-                person.points += flaged.points
-                db.session.add(person)
-                db.session.add(flaged)
-                db.session.commit()
-            except:
-                return f'<meta http-equiv="refresh" content="2; url=/person?name={person.name}"><h1>OH CRAP!</h1><h2>An error occured!</h2>'
-            finally:
-                print(f"INFO: Flagsubmit recived from {person.name}")
-                return f'<meta http-equiv="refresh" content="2; url=/person?name={person.name}"><h1>SUBMITTED!</h1><h2>YOUR SCORE\'s now: {person.points}</h2>'
-        elif person.name in flaged.persons:
-            print(f"INFO: Detected multiple submission from { person.name }")
-            return f'<meta http-equiv="refresh" content="2; url=/person?name={person.name}"><h1>YOU LITTLE...</h1><h2>You really tried to enter a flag two times?</h2>'
+        for p in flaged.persons.split("�"):
+            if p == person:
+                print(f"INFO: Detected multiple submission from { person.name }")
+                return f'<meta http-equiv="refresh" content="2; url=/person?name={person.name}"><h1>YOU LITTLE...</h1><h2>You really tried to enter a flag two times?</h2>'
+        try:
+            db.session.delete(person)
+            db.session.delete(flaged)
+            flaged.persons += person.name+"�"
+            person.points += flaged.points
+            db.session.add(person)
+            db.session.add(flaged)
+            db.session.commit()
+        except:
+            return f'<meta http-equiv="refresh" content="2; url=/person?name={person.name}"><h1>OH CRAP!</h1><h2>An error occured!</h2>'
+        finally:
+            print(f"INFO: Flagsubmit recived from {person.name}")
+            return f'<meta http-equiv="refresh" content="2; url=/person?name={person.name}"><h1>SUBMITTED!</h1><h2>YOUR SCORE\'s now: {person.points}</h2>'
     except:
         print(f"INFO: False Flagsubmit recived from {person.name}")
         return render_template('false_flag.html', person=person)
